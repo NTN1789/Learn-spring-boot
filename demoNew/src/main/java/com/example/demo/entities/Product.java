@@ -1,16 +1,26 @@
 package com.example.demo.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+
 public class Product  implements Serializable {
+
+    //mapeamentos objeto-relacional;
 private  static  final  long serialVersionUid = 1L;
+
+@Id
+@GeneratedValue(strategy =  GenerationType.IDENTITY)    // vai auto incrementar no banco
 private  Long id ;
 
 private  String name ;
 private Double  price;
 
-
+@ManyToOne      // isso e uma relação com os objetos de memoria  com o banco de dados relacional a chave estrangeira
+@JoinColumn(name = "category_id")   // nome da chave estrageira na tabela do banco
 private  Category category;
 
 

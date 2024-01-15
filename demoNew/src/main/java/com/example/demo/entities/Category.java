@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,15 +9,23 @@ import java.util.List;
 import java.util.Objects;
 
 
+@Entity
 
 public class Category implements Serializable {
 
     private  static  final  long serialVersionUid = 1L;
+
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)    // vai auto incrementar no banco
     private  Long id ;
     private  String name;
 
 
 @JsonIgnore  // não serializar os produtos  isso e muito últil para evitar erros
+
+
+   @OneToMany(mappedBy = "category") // tem que colocar o nome do atributo que vai usar , aqui e  o category
     private  List<Product> products = new ArrayList<>();
 
     public  Category(){
